@@ -98,13 +98,14 @@ WSGI_APPLICATION = 'cmvp_base.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cmvp_db',
-        'USER': 'cmvp_db_user',
-        'PASSWORD': '3dXsTUzWMQlBCeW11JxtThl2x2iqkK0t',
-        'HOST': 'dpg-cqb69paj1k6c73am6kbg-a.oregon-postgres.render.com',
-        'PORT': '5432',
+        'NAME': 'cmvp_db_y7k2',            # Database name
+        'USER': 'cmvp_db_y7k2_user',       # Database user
+        'PASSWORD': 'os4fe4A7RklBLpkbrZd2aYMAoyjh643F',  # Database password
+        'HOST': 'dpg-cqch78l6l47c73d4imlg-a.oregon-postgres.render.com',  # Database host
+        'PORT': '',                        # Database port (leave empty for default)
     }
 }
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
