@@ -26,7 +26,7 @@ CORS_ALLOW_ALL_ORIGINS = True  # Allow all origins (for development only)
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://cmvp-web-solution.vercel.app/"
+    "https://cmvp-web-solution.vercel.app"
 ]
 
 

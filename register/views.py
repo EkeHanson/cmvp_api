@@ -1,8 +1,7 @@
 from django.core.mail import send_mail
-from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.request import Request
+from django.utils import timezone
 from rest_framework import status
 from .serializers import CustomUserSerializer
 from .models import CustomUser
@@ -19,16 +18,11 @@ import datetime
 from datetime import timedelta
 from django.conf import settings
 from django.utils import timezone
-from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
 from .models import CustomUser
 
 
 # views.py
 from django.core.mail import send_mail
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-import json
 
 
 class LoginView(APIView):
@@ -42,7 +36,11 @@ class LoginView(APIView):
         user = authenticate(email=email, password=password)
 
         if user:
-            # If authentication is successful, generate JWT tokens
+            # Update the last_login field
+            user.last_login = timezone.now()
+            user.save(update_fields=['last_login'])
+
+            # Generate JWT tokens
             refresh = RefreshToken.for_user(user)
 
             # Set token lifetime based on remember_me
@@ -56,15 +54,14 @@ class LoginView(APIView):
                 'refresh_token': str(refresh),
                 'user_id': user.id,
                 'user_email': user.email,
-                'firstName': user.firstName,
-                'middleName': user.middleName,
-                'otherName': user.otherNames,
+                'first_name': user.first_name,
+                'middle_name': user.middle_name,
+                'last_name': user.last_name,
             }
         else:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
         return Response(response_data)
-
 
 # @api_view(['POST'])
 # def send_registration_email(request):

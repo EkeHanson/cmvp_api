@@ -27,11 +27,16 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     reset_token = models.CharField(max_length=100, blank=True, null=True)
     reset_token_expires = models.DateTimeField(null=True, blank=True)
+
+    num_uploaded_files = models.IntegerField(default=0)
+    num_deleted_files = models.IntegerField(default=0)
+
+    phone = models.CharField(null=True, blank=True, max_length=15)
     phone = models.CharField(null=True, blank=True, max_length=15)
     image = models.ImageField(blank=True, null=True, upload_to='user_images')
 
-    firstName = models.CharField(max_length=255)
-    lastName = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     middle_name = models.CharField(max_length=255, default="None")
 
     country = models.CharField(max_length=255, null=True, blank=True)
